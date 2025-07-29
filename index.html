@@ -3,445 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Analysator | Proven Media</title>
+    <title>Gratis Website Check</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            50% { opacity: 1; }
+            100% { opacity: 0.2; }
         }
-        .pulse-animation {
-            animation: pulse 2s infinite;
+        
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
         }
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-            100% {
-                transform: scale(1);
-            }
+        
+        .form-container {
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.5);
         }
-        .result-card {
+        
+        .input-field {
             transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
         }
-        .result-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        
+        .input-field:focus {
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(100, 149, 237, 0.8);
+        }
+        
+        .submit-btn {
+            transition: all 0.3s ease;
+            background: linear-gradient(45deg, #4f46e5, #8b5cf6);
         }
 
-  .poppins-bold {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700; /* 700 = Bold */
-  }
+        .insta-btn {
+            transition: all 0.3s ease;
+            background: purple;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(1px);
+        }
+        
+        .success-message {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infiite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
     </style>
 </head>
-<body class="font-sans bg-gray-50">
-    <!-- Hero Section -->
-    <div class="gradient-bg text-white">
-        <div class="container mx-auto px-6 py-16 md:py-24">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0">
-                    <h1 class="poppins-bold">proven</h1>
-                    <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6">Presteert uw website optimaal?</h1>
-                    <p class="text-xl mb-8 opacity-90">Krijg direct inzicht in de prestaties, SEO en gebruikerservaring van uw website met onze gratis analysetool.</p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <input type="text" id="websiteUrl" placeholder="Voer uw website URL in" class="flex-grow px-6 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-300">
-                        <button onclick="analyzeWebsite()" class="bg-white text-purple-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300 flex items-center justify-center">
-                            <i class="fas fa-chart-line mr-2"></i> Analyseer Nu
-                        </button>
-                        <a href="https://provenmedia.nl" class="button">
-                        <button class="bg-white text-purple-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300 flex items-center justify-center">
-                            <i class="fas fa-medal mr-2"></i> Plan een gratis gesprek
-                        </button>
-                        </a>
-                    </div>
-                </div>
-                <div class="md:w-1/2 flex justify-center">
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- How It Works -->
-    <div class="py-16 bg-white">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Hoe het werkt</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="text-center p-6 rounded-lg bg-gray-50 hover:bg-purple-50 transition duration-300">
-                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-link text-purple-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">Voer uw URL in</h3>
-                    <p class="text-gray-600">Typ eenvoudig uw websiteadres in en klik op de analyseknop.</p>
-                </div>
-                <div class="text-center p-6 rounded-lg bg-gray-50 hover:bg-purple-50 transition duration-300">
-                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-tachometer-alt text-purple-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">Directe analyse</h3>
-                    <p class="text-gray-600">Ons systeem scant uw website en evalueert meerdere prestatieaspecten.</p>
-                </div>
-                <div class="text-center p-6 rounded-lg bg-gray-50 hover:bg-purple-50 transition duration-300">
-                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-chart-pie text-purple-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">Ontvang resultaten</h3>
-                    <p class="text-gray-600">Ontvang gedetailleerde inzichten en aanbevelingen om uw site te verbeteren.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Results Section (Initially Hidden) -->
-    <div id="resultsSection" class="hidden py-16 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Uw Website Analyse</h2>
-            <p class="text-center text-gray-600 mb-12">Zo presteert uw website op belangrijke punten</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                <div class="result-card bg-white p-6 rounded-xl shadow-md">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-bolt text-green-600"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold">Prestaties</h3>
-                    </div>
-                    <div class="flex items-end mb-2">
-                        <span id="performanceScore" class="text-3xl font-bold mr-2">0</span>
-                        <span class="text-gray-500">/100</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2.5">
-                        <div id="performanceBar" class="bg-green-600 h-2.5 rounded-full" style="width: 0%"></div>
-                    </div>
-                    <p id="performanceFeedback" class="mt-3 text-gray-600 text-sm">Analyseren..</p>
-                </div>
-                
-                <div class="result-card bg-white p-6 rounded-xl shadow-md">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-search text-blue-600"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold">SEO</h3>
-                    </div>
-                    <div class="flex items-end mb-2">
-                        <span id="seoScore" class="text-3xl font-bold mr-2">0</span>
-                        <span class="text-gray-500">/100</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2.5">
-                        <div id="seoBar" class="bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
-                    </div>
-                    <p id="seoFeedback" class="mt-3 text-gray-600 text-sm">Analyseren...</p>
-                </div>
-                
-                <div class="result-card bg-white p-6 rounded-xl shadow-md">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-mobile-alt text-purple-600"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold">Mobiel</h3>
-                    </div>
-                    <div class="flex items-end mb-2">
-                        <span id="mobileScore" class="text-3xl font-bold mr-2">0</span>
-                        <span class="text-gray-500">/100</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2.5">
-                        <div id="mobileBar" class="bg-purple-600 h-2.5 rounded-full" style="width: 0%"></div>
-                    </div>
-                    <p id="mobileFeedback" class="mt-3 text-gray-600 text-sm">Analyseren..</p>
-                </div>
-                
-                <div class="result-card bg-white p-6 rounded-xl shadow-md">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-user-friends text-yellow-600"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold">Toegankelijkheid</h3>
-                    </div>
-                    <div class="flex items-end mb-2">
-                        <span id="accessibilityScore" class="text-3xl font-bold mr-2">0</span>
-                        <span class="text-gray-500">/100</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2.5">
-                        <div id="accessibilityBar" class="bg-yellow-600 h-2.5 rounded-full" style="width: 0%"></div>
-                    </div>
-                    <p id="accessibilityFeedback" class="mt-3 text-gray-600 text-sm">Analyseren..</p>
-                </div>
+<body class="min-h-screen bg-black text-white relative overflow-hidden">
+    <!-- Stars background -->
+    <div id="stars-container"></div>
+    
+    <div class="container mx-auto px-4 py-16 flex items-center justify-center min-h-screen">
+        <div class="form-container rounded-xl p-8 max-w-md w-full relative z-10 border border-gray-700 shadow-xl floating">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold mb-2">Gratis website check</h1>
+                <p class="text-gray-300">Krijg een gratis professionele website check</p>
             </div>
             
-            <div class="bg-white rounded-xl shadow-md p-8 mb-12">
-                <h3 class="text-2xl font-semibold mb-6">Overal resultaat</h3>
-                <p id="overallFeedback" class="text-gray-700 mb-6">Onze analyse is nog gaande. We zullen een uitgebreide evaluatie uitvoeren van de sterke punten en verbeterpunten van uw website.</p>
-                <div class="flex flex-wrap gap-4">
-                    <div class="bg-red-50 text-red-800 px-4 py-2 rounded-full text-sm font-medium">
-                        <i class="fas fa-exclamation-circle mr-2"></i> <span id="issue1">Laden...</span>
-                    </div>
-                    <div class="bg-yellow-50 text-yellow-800 px-4 py-2 rounded-full text-sm font-medium">
-                        <i class="fas fa-exclamation-triangle mr-2"></i> <span id="issue2">Laden...</span>
-                    </div>
-                    <div class="bg-green-50 text-green-800 px-4 py-2 rounded-full text-sm font-medium">
-                        <i class="fas fa-check-circle mr-2"></i> <span id="strength1">Laden...</span>
-                    </div>
+            <form id="contact-form" action="https://formspree.io/f/xeozkwgp" method="POST" class="space-y-6">
+                <div>
+                    <label for="name" class="block text-sm font-medium mb-1">Naam*</label>
+                    <input type="text" id="name" name="name" required 
+                           class="w-full px-4 py-3 rounded-lg input-field border border-gray-700 focus:border-indigo-500 focus:outline-none">
                 </div>
-            </div>
-            
-            <div class="text-center">
-                <p class="text-gray-600 mb-6">Wilt u professionele hulp om uw website te verbeteren?</p>
-                <a href="https://provenmedia.nl" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 px-8 rounded-lg inline-flex items-center transition duration-300">
-                    <i class="fas fa-medal mr-2"></i> Laat het professioneel doen
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Features -->
-    <div class="py-16 bg-white">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Waarom jouw website analyseren optimaal kan zijn</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div class="flex">
-                    <div class="mr-6">
-                        <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center">
-                            <i class="fas fa-rocket text-purple-600 text-xl"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold mb-3">Boost laad tijd</h3>
-                        <p class="text-gray-600">Snelladen­de websites scoren hoger in zoekmachines en bieden een betere gebruikerservaring, wat leidt tot meer conversies.</p>
-                    </div>
+                
+                <div>
+                    <label for="email" class="block text-sm font-medium mb-1">Email*</label>
+                    <input type="email" id="email" name="email" required 
+                           class="w-full px-4 py-3 rounded-lg input-field border border-gray-700 focus:border-indigo-500 focus:outline-none">
                 </div>
-                <div class="flex">
-                    <div class="mr-6">
-                        <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center">
-                            <i class="fas fa-search-dollar text-blue-600 text-xl"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold mb-3">Verbeter SEO ranking</h3>
-                        <p class="text-gray-600">Een goede SEO-implementatie zorgt ervoor dat je website verschijnt bij relevante zoekopdrachten, wat organisch verkeer naar je bedrijf brengt.</p>
-                    </div>
+                
+                <div>
+                    <label for="company" class="block text-sm font-medium mb-1">Bedrijf</label>
+                    <input type="text" id="company" name="company" 
+                           class="w-full px-4 py-3 rounded-lg input-field border border-gray-700 focus:border-indigo-500 focus:outline-none">
                 </div>
-                <div class="flex">
-                    <div class="mr-6">
-                        <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center">
-                            <i class="fas fa-mobile text-green-600 text-xl"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold mb-3">Verbeter mobiele ervaring</h3>
-                        <p class="text-gray-600">Omdat de meeste gebruikers via mobiele apparaten browsen, is een responsief ontwerp cruciaal voor betrokkenheid en conversies.</p>
-                    </div>
+                
+                <div>
+                    <label for="message" class="block text-sm font-medium mb-1">Bericht</label>
+                    <textarea id="message" name="message" rows="2" 
+                              class="w-full px-4 py-3 rounded-lg input-field border border-gray-700 focus:border-indigo-500 focus:outline-none"></textarea>
                 </div>
-                <div class="flex">
-                    <div class="mr-6">
-                        <div class="w-14 h-14 bg-yellow-100 rounded-full flex items-center justify-center">
-                            <i class="fas fa-universal-access text-yellow-600 text-xl"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold mb-3">Verzeker toegankelijkheid</h3>
-                        <p class="text-gray-600">Toegankelijke websites bereiken een breder publiek, verbeteren de gebruikerservaring en scoren vaak beter in de zoekresultaten.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- CTA -->
-    <div class="gradient-bg text-white py-16">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6">Klaar om uw website te transformeren?</h2>
-            <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">Ontvang een professionele analyse en praktische inzichten om uw online aanwezigheid naar een hoger niveau te tillen.</p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <input type="text" id="websiteUrl2" placeholder="Voer uw website URL in" class="flex-grow max-w-md px-6 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-300">
-                <button onclick="analyzeWebsite()" class="bg-white text-purple-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300 flex items-center justify-center">
-                    <i class="fas fa-chart-line mr-2"></i> Analyseer nu
+                
+                <button type="submit" class="w-full py-3 px-4 rounded-lg font-bold submit-btn flex items-center justify-center space-x-2">
+                    <span>Versturen</span>
+                    <i class="fas fa-paper-plane"></i>
                 </button>
+                <a href="https://provenmedia.nl" target="_blank" rel="noopener noreferrer"
+   class="w-full py-3 px-4 rounded-lg font-bold submit-btn flex items-center justify-center space-x-2">
+  <span>Doe het professioneel</span>
+  <i class="fas fa-crown"></i>
+</a>
+                <a href="https:/instagram.com/provenmedianl" class="w-full py-3 px-4 rounded-lg font-bold insta-btn flex items-center justify-center space-x-2">
+                    <span>Onze Instagram</span>
+                    <i class="fas fa-crown"></i>
+                </a>
+            </form>
+            
+            <div id="success-message" class="hidden success-message text-center mt-6 p-4 bg-green-900/50 rounded-lg">
+                <i class="fas fa-check-circle text-4xl text-green-400 mb-3"></i>
+                <h3 class="text-xl font-bold mb-1">Verstuurd!</h3>
+                <p class="text-gray-300">We versturen de uitslag zo snel mogelijk.</p>
             </div>
         </div>
     </div>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0">
-                    <a href="https://provenmedia.nl" class="text-2xl font-bold">Proven Media</a>
-                    <p class="text-gray-400 mt-2">Van visie naar visuele impact</p>
-                </div>
-                <div class="flex space-x-6">
-                    <a href="https://www.facebook.com/profile.php?id=61577769650741" class="text-gray-400 hover:text-white transition duration-300">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="https://instagram.com/provenmedianl" class="text-gray-400 hover:text-white transition duration-300">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 mb-4 md:mb-0">© 2025 Proven Media</p>
-                <div class="flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300"></a>
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300"></a>
-                    <a href="https://provenmedia.nl" class="text-gray-400 hover:text-white transition duration-300">Neem contact op</a>
-                </div>
-            </div>
-        </div>
-    </footer>
 
     <script>
-        function analyzeWebsite() {
-            const urlInput = document.getElementById('websiteUrl').value || document.getElementById('websiteUrl2').value;
+        // Create stars
+        function createStars() {
+            const container = document.getElementById('stars-container');
+            const starCount = 100;
             
-            if (!urlInput) {
-                alert('Voer alsjeblieft een URL in...');
-                return;
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // Random size between 1-3px
+                const size = Math.random() * 2 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // Random position
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation delay
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                
+                container.appendChild(star);
             }
-            
-            // Show loading state
-            document.getElementById('resultsSection').classList.remove('hidden');
-            document.getElementById('overallFeedback').textContent = "Analyseren... dit kan even duren.";
-            
-            // Simulate analysis with random scores (in a real app, this would be an API call)
-            setTimeout(() => {
-                // Generate random scores between 40-95 for demo purposes
-                const performanceScore = Math.floor(Math.random() * 56) + 40;
-                const seoScore = Math.floor(Math.random() * 56) + 40;
-                const mobileScore = Math.floor(Math.random() * 56) + 40;
-                const accessibilityScore = Math.floor(Math.random() * 56) + 40;
-                const averageScore = Math.round((performanceScore + seoScore + mobileScore + accessibilityScore) / 4);
-                
-                // Update scores
-                animateValue('performanceScore', 0, performanceScore, 1000);
-                animateValue('seoScore', 0, seoScore, 1000);
-                animateValue('mobileScore', 0, mobileScore, 1000);
-                animateValue('accessibilityScore', 0, accessibilityScore, 1000);
-                
-                // Update progress bars
-                setTimeout(() => {
-                    document.getElementById('performanceBar').style.width = performanceScore + '%';
-                    document.getElementById('seoBar').style.width = seoScore + '%';
-                    document.getElementById('mobileBar').style.width = mobileScore + '%';
-                    document.getElementById('accessibilityBar').style.width = accessibilityScore + '%';
-                }, 50);
-                
-                // Update feedback
-                updateFeedback(performanceScore, seoScore, mobileScore, accessibilityScore, averageScore);
-                
-                // Scroll to results
-                document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
-            }, 1500);
         }
         
-        function animateValue(id, start, end, duration) {
-            const obj = document.getElementById(id);
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                obj.innerHTML = Math.floor(progress * (end - start) + start);
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
+        // Handle form submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const formData = new FormData(form);
+            
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
                 }
-            };
-            window.requestAnimationFrame(step);
-        }
+            })
+            .then(response => {
+                if (response.ok) {
+                    form.style.display = 'none';
+                    document.getElementById('success-message').classList.remove('hidden');
+                } else {
+                    throw new Error('Niet gelukt.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Er is een probleem opgetreden. Probeer het later opnieuw.');
+            });
+        });
         
-        function updateFeedback(performance, seo, mobile, accessibility, average) {
-            // Performance feedback
-            if (performance >= 80) {
-                document.getElementById('performanceFeedback').textContent = "Uitstekende prestaties! Je website laadt snel.";
-                document.getElementById('performanceFeedback').classList.add('text-green-600');
-            } else if (performance >= 60) {
-                document.getElementById('performanceFeedback').textContent = "Goede prestatie, maar er is altijd plaats voor verbetering.";
-                document.getElementById('performanceFeedback').classList.add('text-yellow-600');
-            } else {
-                document.getElementById('performanceFeedback').textContent = "Slechte prestatie. Je website kan bezoekers verliezen door het laden.";
-                document.getElementById('performanceFeedback').classList.add('text-red-600');
-            }
-            
-            // SEO feedback
-            if (seo >= 80) {
-                document.getElementById('seoFeedback').textContent = "Uitstekende SEO! Uw website is goed geoptimaliseerd voor zoekmachines.";
-                document.getElementById('seoFeedback').classList.add('text-green-600');
-            } else if (seo >= 60) {
-                document.getElementById('seoFeedback').textContent = "Redelijke SEO, maar sommige termen kunnen beter.";
-                document.getElementById('seoFeedback').classList.add('text-yellow-600');
-            } else {
-                document.getElementById('seoFeedback').textContent = "Slechte SEO. Je website wordt slecht opgevat in Zoekopdrachten.";
-                document.getElementById('seoFeedback').classList.add('text-red-600');
-            }
-            
-            // Mobile feedback
-            if (mobile >= 80) {
-                document.getElementById('mobileFeedback').textContent = "Uitstekende mobiele ervaring! Uw website werkt perfect op alle apparaten.";
-                document.getElementById('mobileFeedback').classList.add('text-green-600');
-            } else if (mobile >= 60) {
-                document.getElementById('mobileFeedback').textContent = "Goede mobiele ervaring, maar sommige dingen kunnen beter.";
-                document.getElementById('mobileFeedback').classList.add('text-yellow-600');
-            } else {
-                document.getElementById('mobileFeedback').textContent = "Slechte mobiele ervaring. Bezoekers kunnen moeite krijgen met het browsen.";
-                document.getElementById('mobileFeedback').classList.add('text-red-600');
-            }
-            
-            // Accessibility feedback
-            if (accessibility >= 80) {
-                document.getElementById('accessibilityFeedback').textContent = "Uitstekende toegankelijkheid! Uw website is voor iedereen bruikbaar.";
-                document.getElementById('accessibilityFeedback').classList.add('text-green-600');
-            } else if (accessibility >= 60) {
-                document.getElementById('accessibilityFeedback').textContent = "Redelijke toegankelijkheid, maar sommige gebruikers kunnen problemen krijgen.";
-                document.getElementById('accessibilityFeedback').classList.add('text-yellow-600');
-            } else {
-                document.getElementById('accessibilityFeedback').textContent = "Slechte toegankelijkheid. Je website kan bezoekers afschrikken.";
-                document.getElementById('accessibilityFeedback').classList.add('text-red-600');
-            }
-            
-            // Overall feedback
-            let overallMessage = "";
-            if (average >= 80) {
-                overallMessage = `Je website scoort ${average}/100 - Goed werk! Je website presteert goed. Toch professioneler laten doen? Klik op de knop hieronder om vandaag nog te beginnen.`;
-            } else if (average >= 60) {
-                overallMessage = `Je website scoort ${average}/100 - Goed maar kan beter. Professioneel laten doen? Klik op de knop hieronder om vandaag nog te beginnen.`;
-            } else {
-                overallMessage = `Je website scoort ${average}/100 - Heeft aanpassing nodig. Professioneel laten doen? Klik op de knop hieronder om vandaag nog te beginnen.`;
-            }
-            document.getElementById('overallFeedback').textContent = overallMessage;
-            
-            // Issues and strengths
-            const issues = [
-                "Langzame laad tijd",
-                "Missende meta beschrijving",
-                "Kleine raakpunten op telefoon",
-                "Laag contrast tekst",
-                "Ongeoptimaliseerde foto's",
-                "Missende alt tekst",
-                "Geblokkeerde CSS/JS",
-                "Geen Caching Policy"
-            ];
-            
-            const strengths = [
-                "Snelle server respons",
-                "Goede foto optimalisatie",
-                "Goede heading structuur",
-                "Mobiel-vriendelijk design",
-                "Schone URL structuur",
-                "Beveiligde HTTPS Connectie",
-                "Goede content organisatie",
-                "Snel geladen"
-            ];
-            
-            // Shuffle arrays and pick random items
-            const shuffledIssues = issues.sort(() => 0.5 - Math.random());
-            const shuffledStrengths = strengths.sort(() => 0.5 - Math.random());
-            
-            document.getElementById('issue1').textContent = shuffledIssues[0];
-            document.getElementById('issue2').textContent = shuffledIssues[1];
-            document.getElementById('strength1').textContent = shuffledStrengths[0];
-        }
+        // Initialize stars when page loads
+        window.addEventListener('DOMContentLoaded', createStars);
     </script>
 </body>
 </html>
